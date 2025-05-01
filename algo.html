@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Algorithms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            width: 60%;
+            text-align: left;
+        }
+        h1 {
+            color: #333;
+        }
+        h3 {
+            color: #007bff;
+        }
+        p {
+            line-height: 1.6;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .algorithm-box {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            margin-top: 10px;
+        }
+        .code {
+            background-color: #eef;
+            padding: 10px;
+            font-family: monospace;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Algorithm Details</h1>
+    
+    <div class="container">
+        <h3>HealthifyMe</h3>
+        <div class="algorithm-box">
+            <p>
+                This algorithm estimates the calorie and macronutrient content of a meal using a combination of a nutritional database and machine learning (ML).  
+                It takes input ingredients, calculates base calorie values, and refines them based on preparation methods and ML predictions.
+            </p>
+            <strong>Steps:</strong>
+            <ol>
+                <li>Standardizes ingredient names and portion sizes.</li>
+                <li>Fetches nutrition data from a database (e.g., USDA).</li>
+                <li>Calculates base calorie and macronutrient values.</li>
+                <li>Uses ML to adjust for cooking methods and portion variations.</li>
+                <li>Outputs the estimated nutritional breakdown.</li>
+            </ol>
+            <p><strong>Example Calculation:</strong></p>
+            <div class="code">
+                Input: Chicken breast (150g), Rice (1 cup), Olive oil (1 tbsp), Fried <br>
+                Base Calories: 567.5 kcal <br>
+                ML Adjustment (Frying): +10% <br>
+                Final Calories: 674.25 kcal
+            </div>
+        </div>
+
+        <h3>CaloriMate</h3>
+        <div class="algorithm-box">
+            <p>
+                This algorithm simplifies calorie estimation by summing ingredient calories while considering portion sizes and preparation methods.
+            </p>
+            <strong>Steps:</strong>
+            <ol>
+                <li>Fetch calorie values per unit from a nutritional database.</li>
+                <li>Adjust for portion size using a scaling formula.</li>
+                <li>Apply preparation method adjustments (e.g., frying adds extra calories).</li>
+                <li>Output the total estimated calories.</li>
+            </ol>
+            <p><strong>Example Calculation:</strong></p>
+            <div class="code">
+                Input: Chicken breast (150g), Rice (1 cup), Olive oil (1 tbsp), Fried <br>
+                Base Calories: 567.5 kcal <br>
+                Frying Adjustment: +50 kcal <br>
+                Final Calories: 617.5 kcal
+            </div>
+        </div>
+
+        <h3>CalorieKing</h3>
+        <div class="algorithm-box">
+            <p>
+                CalorieKing emphasizes science-based tools, reliable food data, and behavioral change support to help users achieve lifelong weight control.  
+                The system utilizes validated nutritional databases, user input, and behavior-driven recommendations for effective calorie estimation.
+            </p>
+            <strong>Steps:</strong>
+            <ol>
+                <li>Collects data from trusted sources (e.g., USDA, clinical studies, food manufacturers).</li>
+                <li>Cross-checks values to ensure accuracy and remove inconsistencies.</li>
+                <li>Standardizes food names and portion sizes for consistency.</li>
+                <li>Allows users to input food items and portion sizes.</li>
+                <li>Fetches calorie and macronutrient data from the database.</li>
+                <li>Calculates the total calories and nutrients for the selected meal.</li>
+                <li>Provides personalized recommendations based on user goals.</li>
+                <li>Tracks progress and offers educational content for long-term weight control.</li>
+            </ol>
+            <p><strong>Example Calculation:</strong></p>
+            <div class="code">
+                Input: Chicken breast (150g), Rice (1 cup), Olive oil (1 tbsp) <br>
+                Base Calories: 567.5 kcal <br>
+                Personalized Adjustment: Based on user goals <br>
+                Final Calories: 567.5 kcal (adjusted for individual dietary needs)
+            </div>
+        </div>
+
+        <button onclick="goBack()">Go Back</button>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>
