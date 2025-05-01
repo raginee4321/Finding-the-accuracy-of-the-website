@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #eef2f3, #a3ebb1);
+            margin: 0;
+            padding: 0;
+        }
+        .result {
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.3);
+            width: 50%;
+            text-align: left;
+        }
+        h1 {
+            color: #007bff;
+        }
+        .result h3 {
+            color: #28a745;
+        }
+        p {
+            font-size: 18px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Comparison Result</h1>
+    
+    <div class="result" id="result">
+        <h3>Best Website for Your Search</h3>
+        <p><strong>Food Item:</strong> <span id="foodName"></span></p>
+        <p><strong>Best Website:</strong> <span id="bestWebsite"></span></p>
+        <p><strong>Reason:</strong> <span id="reason"></span></p>
+        <button onclick="redirectToAlgorithm()">Want to know the algorithm?</button>
+    </div>
+
+    <script>
+        // Retrieve the result from localStorage
+        const resultData = JSON.parse(localStorage.getItem('comparisonResult'));
+
+        // Display the result
+        if (resultData) {
+            document.getElementById('foodName').textContent = resultData.food;
+            document.getElementById('bestWebsite').textContent = resultData.bestWebsite;
+            document.getElementById('reason').textContent = resultData.reason;
+        } else {
+            document.getElementById('result').innerHTML = "<p>No result found. Please go back and submit the form.</p>";
+        }
+
+        // Function to redirect to the algorithm page
+        function redirectToAlgorithm() {
+            window.location.href = "algo.html";
+        }
+    </script>
+
+</body>
+</html>
