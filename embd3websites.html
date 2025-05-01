@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Nutrient Results</title>
+    <style>
+        /* Existing CSS styles remain the same */
+        .result {
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            width: 50%;
+            text-align: left;
+        }
+        .result h3 {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Three Websites Embedded with Nutrient Forms</h1>
+    
+    <div class="container">
+        <!-- Existing iframe and form code remains the same -->
+    </div>
+
+    <div class="form-container">
+        <h2>Enter Nutrient Details</h2>
+        <form id="nutrientForm">
+            <label for="food">Food Item:</label>
+            <input type="text" id="food" required>
+            
+            <h3>HealthifyMe</h3>
+            <label for="calories1">Calories:</label>
+            <input type="text" id="calories1" required>
+            <label for="protein1">Protein (g):</label>
+            <input type="text" id="protein1" required>
+            <label for="carbs1">Carbohydrates (g):</label>
+            <input type="text" id="carbs1" required>
+            <label for="fats1">Fats (g):</label>
+            <input type="text" id="fats1" required>
+            
+            <h3>CaloriMate</h3>
+            <label for="calories2">Calories:</label>
+            <input type="text" id="calories2" required>
+            <label for="protein2">Protein (g):</label>
+            <input type="text" id="protein2" required>
+            <label for="carbs2">Carbohydrates (g):</label>
+            <input type="text" id="carbs2" required>
+            <label for="fats2">Fats (g):</label>
+            <input type="text" id="fats2" required>
+            
+            <h3>CalorieKing</h3>
+            <label for="calories3">Calories:</label>
+            <input type="text" id="calories3" required>
+            <label for="protein3">Protein (g):</label>
+            <input type="text" id="protein3" required>
+            <label for="carbs3">Carbohydrates (g):</label>
+            <input type="text" id="carbs3" required>
+            <label for="fats3">Fats (g):</label>
+            <input type="text" id="fats3" required>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="result" id="result" style="display: none;">
+        <h3>Comparison Result</h3>
+        <p id="comparisonText"></p>
+    </div>
+
+    <script>
+        function handleIframeError(id) {
+            document.getElementById(`iframe${id}`).style.display = "none";
+            document.getElementById(`fallback${id}`).style.display = "block";
+        }
+
+        // Function to compare results
+        function compareResults() {
+            // Get user inputs
+            const food = document.getElementById('food').value;
+            const calories1 = parseFloat(document.getElementById('calories1').value);
+            const protein1 = parseFloat(document.getElementById('protein1').value);
+            const carbs1 = parseFloat(document.getElementById('carbs1').value);
+            const fats1 = parseFloat(document.getElementById('fats1').value);
+
+            const calories2 = parseFloat(document.getElementById('calories2').value);
+            const protein2 = parseFloat(document.getElementById('protein2').value);
+            const carbs2 = parseFloat(document.getElementById('carbs2').value);
+            const fats2 = parseFloat(document.getElementById('fats2').value);
+
+            const calories3 = parseFloat(document.getElementById('calories3').value);
+            const protein3 = parseFloat(document.getElementById('protein3').value);
+            const carbs3 = parseFloat(document.getElementById('carbs3').value);
+            const fats3 = parseFloat(document.getElementById('fats3').value);
+
+            // Define expected values (for demonstration, use average values)
+            const expectedCalories = 500; // Example expected value
+            const expectedProtein = 30;   // Example expected value
+            const expectedCarbs = 50;     // Example expected value
+            const expectedFats = 20;      // Example expected value
+
+            // Calculate scores for each website
+            const score1 = calculateScore(calories1, protein1, carbs1, fats1, expectedCalories, expectedProtein, expectedCarbs, expectedFats);
+            const score2 = calculateScore(calories2, protein2, carbs2, fats2, expectedCalories, expectedProtein, expectedCarbs, expectedFats);
+            const score3 = calculateScore(calories3, protein3, carbs3, fats3, expectedCalories, expectedProtein, expectedCarbs, expectedFats);
+
+            // Determine the best website
+            const websites = [
+                { name: "HealthifyMe", score: score1 },
+                { name: "CaloriMate", score: score2 },
+                { name: "CalorieKing", score: score3 }
+            ];
+            const bestWebsite = websites.reduce((a, b) => a.score > b.score ? a : b);
+
+            // Display the result
+            document.getElementById('comparisonText').innerHTML = `
+                <strong>Best Website:</strong> ${bestWebsite.name}<br>
+                <strong>Reason:</strong> It provided the most accurate and complete nutrient data for "${food}".
+            `;
+            document.getElementById('result').style.display = "block";
+        }
+
+        // Function to calculate a score for each website
+        function calculateScore(calories, protein, carbs, fats, expectedCalories, expectedProtein, expectedCarbs, expectedFats) {
+            const calorieDiff = Math.abs(calories - expectedCalories);
+            const proteinDiff = Math.abs(protein - expectedProtein);
+            const carbsDiff = Math.abs(carbs - expectedCarbs);
+            const fatsDiff = Math.abs(fats - expectedFats);
+
+            // Lower difference = higher score
+            const score = 100 - (calorieDiff + proteinDiff + carbsDiff + fatsDiff);
+            return score;
+        }
+
+        // Attach the compareResults function to the form submission
+        document.getElementById('nutrientForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            compareResults();
+        });
+    </script>
+
+</body>
+</html>
