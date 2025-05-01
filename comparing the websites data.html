@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Nutrient Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #eef2f3, #a3ebb1); /* Gradient Background */
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #21b6a8;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px;
+            gap: 20px;
+        }
+        .website-box {
+            width: 30%;
+            height: 500px;
+            background: white;
+            border: 2px solid #34495e;
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        h2 {
+            margin: 0;
+            background: #16a085;
+            color: white;
+            padding: 15px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .fallback {
+            display: none;
+            padding: 20px;
+        }
+        .open-btn {
+            margin-top: 10px;
+            padding: 12px 18px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .open-btn:hover {
+            background-color: #c0392b;
+        }
+        .form-container {
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.3);
+            width: 40%;
+            text-align: left;
+        }
+        input, textarea, button {
+            width: calc(100% - 20px);
+            margin-top: 15px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #27ae60;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            border: none;
+        }
+        button:hover {
+            background-color: #219150;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .website-box {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+            .form-container {
+                width: 90%;
+            }
+        }
+        .description-section {
+            background: white;
+            padding: 30px;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+        .description-section img {
+            width: 120px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        .result {
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.3);
+            width: 80%;
+            text-align: left;
+        }
+        .result h3 {
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CompareCals</h1>
+    </header>
+    
+    <h1>Top Three Websites for Comparison</h1>
+
+    <div class="container">
+        <div class="website-box">
+            <h2>HealthifyMe</h2>
+            <iframe src="https://www.healthifyme.com" id="iframe1" loading="lazy" onerror="handleIframeError(1)"></iframe>
+            <div class="fallback" id="fallback1">
+                <p>Website cannot be embedded.</p>
+                <button class="open-btn" onclick="window.open('https://www.healthifyme.com', '_blank')">Open in New Tab</button>
+            </div>
+        </div>
+        <div class="website-box">
+            <h2>CaloriMate</h2>
+            <iframe src="https://calorimate.com/" id="iframe2" loading="lazy" onerror="handleIframeError(2)"></iframe>
+            <div class="fallback" id="fallback2">
+                <p>Website cannot be embedded.</p>
+                <button class="open-btn" onclick="window.open('https://calorimate.com/', '_blank')">Open in New Tab</button>
+            </div>
+        </div>
+        <div class="website-box">
+            <h2>CalorieKing</h2>
+            <iframe src="https://www.calorieking.com/us/en/" id="iframe3" loading="lazy" onerror="handleIframeError(3)"></iframe>
+            <div class="fallback" id="fallback3">
+                <p>Website cannot be embedded.</p>
+                <button class="open-btn" onclick="window.open('https://www.calorieking.com/us/en/', '_blank')">Open in New Tab</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h2>Enter Nutrient Details</h2>
+        <form id="nutrientForm">
+            <label for="food">Food Item:</label>
+            <input type="text" id="food" required>
+            
+            <h3>HealthifyMe</h3>
+            <label for="calories1">Calories:</label>
+            <input type="text" id="calories1" required>
+            <label for="protein1">Protein (g):</label>
+            <input type="text" id="protein1" required>
+            <label for="carbs1">Carbohydrates (g):</label>
+            <input type="text" id="carbs1" required>
+            <label for="fats1">Fats (g):</label>
+            <input type="text" id="fats1" required>
+            
+            <h3>CaloriMate</h3>
+            <label for="calories2">Calories:</label>
+            <input type="text" id="calories2" required>
+            <label for="protein2">Protein (g):</label>
+            <input type="text" id="protein2" required>
+            <label for="carbs2">Carbohydrates (g):</label>
+            <input type="text" id="carbs2" required>
+            <label for="fats2">Fats (g):</label>
+            <input type="text" id="fats2" required>
+            
+            <h3>CalorieKing</h3>
+            <label for="calories3">Calories:</label>
+            <input type="text" id="calories3" required>
+            <label for="protein3">Protein (g):</label>
+            <input type="text" id="protein3" required>
+            <label for="carbs3">Carbohydrates (g):</label>
+            <input type="text" id="carbs3" required>
+            <label for="fats3">Fats (g):</label>
+            <input type="text" id="fats3" required>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Result Section -->
+    <div class="result" id="result" style="display: none;">
+        <h3>Comparison Result</h3>
+        <p id="comparisonText"></p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 CompareCals. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function handleIframeError(id) {
+            document.getElementById(`iframe${id}`).style.display = "none";
+            document.getElementById(`fallback${id}`).style.display = "block";
+        }
+    
+        function compareResults() {
+            const food = document.getElementById('food').value;
+            const calories1 = parseFloat(document.getElementById('calories1').value);
+            const protein1 = parseFloat(document.getElementById('protein1').value);
+            const carbs1 = parseFloat(document.getElementById('carbs1').value);
+            const fats1 = parseFloat(document.getElementById('fats1').value);
+    
+            const calories2 = parseFloat(document.getElementById('calories2').value);
+            const protein2 = parseFloat(document.getElementById('protein2').value);
+            const carbs2 = parseFloat(document.getElementById('carbs2').value);
+            const fats2 = parseFloat(document.getElementById('fats2').value);
+    
+            const calories3 = parseFloat(document.getElementById('calories3').value);
+            const protein3 = parseFloat(document.getElementById('protein3').value);
+            const carbs3 = parseFloat(document.getElementById('carbs3').value);
+            const fats3 = parseFloat(document.getElementById('fats3').value);
+    
+            const expectedCalories = 500;
+            const expectedProtein = 30;
+            const expectedCarbs = 50;
+            const expectedFats = 20;
+    
+            const score1 = calculateScore(calories1, protein1, carbs1, fats1, expectedCalories, expectedProtein, expectedCarbs, expectedFats);
+            const score2 = calculateScore(calories2, protein2, carbs2, fats2, expectedCalories, expectedProtein, expectedCarbs, expectedFats);
+            const score3 = calculateScore(calories3, protein3, carbs3, fats3, expectedCalories, expectedProtein, expectedCarbs, expectedFats);
+    
+            const websites = [
+                { name: "HealthifyMe", score: score1 },
+                { name: "CaloriMate", score: score2 },
+                { name: "CalorieKing", score: score3 }
+            ];
+            const bestWebsite = websites.reduce((a, b) => a.score > b.score ? a : b);
+    
+            const resultData = {
+                food,
+                bestWebsite: bestWebsite.name,
+                reason: `It provided the most accurate and complete nutrient data for "${food}".`
+            };
+    
+            localStorage.setItem("comparisonResult", JSON.stringify(resultData));
+            window.location.href = "result.html";
+        }
+    
+        function calculateScore(calories, protein, carbs, fats, expectedCalories, expectedProtein, expectedCarbs, expectedFats) {
+            const calorieDiff = Math.abs(calories - expectedCalories);
+            const proteinDiff = Math.abs(protein - expectedProtein);
+            const carbsDiff = Math.abs(carbs - expectedCarbs);
+            const fatsDiff = Math.abs(fats - expectedFats);
+            return 100 - (calorieDiff + proteinDiff + carbsDiff + fatsDiff);
+        }
+    
+        document.getElementById('nutrientForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            compareResults();
+        });
+    </script>
+</body>
+</html>
